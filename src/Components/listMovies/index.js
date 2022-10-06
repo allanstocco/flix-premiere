@@ -3,10 +3,6 @@ import { getMovies } from "../../Services/data";
 
 export default function ListMovies() {
   const [movies, setMovies] = useState([]);
-  console.log(movies)
-  function Run() {
-    setInterval(useEffect, 5000);
-  }
 
   useEffect(() => {
     getMovies().then((response) =>
@@ -16,7 +12,16 @@ export default function ListMovies() {
         )
       )
     );
-    Run();
+
+    setInterval(() => {
+      getMovies().then((response) =>
+        setMovies(
+          response.data.films.filter(
+            ({ duration_seconds }) => duration_seconds > 5500
+          )
+        )
+      );
+    }, 5000);
   }, []);
 
   return (
