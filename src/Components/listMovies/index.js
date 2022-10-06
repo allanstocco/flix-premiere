@@ -30,7 +30,7 @@ export default function ListMovies() {
         <h1 className="font-weight-light text-center">Movies</h1>
         <div className="container mt-4">
           <div className="row d-flex justify-content-around">
-            {movies.map(({ title, short_description, duration }) => {
+            {movies.map(({ title, short_description, duration, duration_seconds }) => {
               return (
                 <div className="col-auto mb-3" key={title}>
                   <div className="card">
@@ -47,6 +47,11 @@ export default function ListMovies() {
                       <span>
                         <b>
                           <p>{duration}</p>
+                        </b>
+                      </span>
+                      <span>
+                        <b>
+                          <p>{duration_seconds}</p>
                         </b>
                       </span>
                     </div>
