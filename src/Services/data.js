@@ -7,9 +7,6 @@ export const getMovies = async () => {
     );
     return data;
   } catch (err) {
-    if (err) {
-      throw Error("Not Working");
-    }
-    throw new Error(err.message);
+    throw new Error('New error message', { cause: err });
   }
 };
