@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 export default function MaxLimit(props) {
-    const [artist, setArtist] = useState('')
+    const [maxLimit, setMaxLimit] = useState('')
 
     function handleChange(e) {
-        setArtist(e.target.value)
+        setMaxLimit(e.target.value)
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        artist ? props.onSubmit(artist) : props.onSubmit('10')
+        maxLimit ? props.onSubmit(maxLimit) : props.onSubmit('10')
     }
 
     return (
@@ -20,10 +20,10 @@ export default function MaxLimit(props) {
                         <label className="col-form-label" htmlFor="artist">Set a Limit Search!</label>
                     </div>
                     <div className="col-auto">
-                        <input type="number" id="artist" value={artist} onChange={handleChange} className="form-control" placeholder='' />
+                        <input type="number" id="artist" value={maxLimit} onChange={handleChange} className="form-control" placeholder='' />
                     </div>
                     <div className="col-auto">
-                        <button type="submit" className="btn btn-light">Search</button>
+                        <button type="submit" className="btn btn-light">Filter</button>
                     </div>
                 </div>
             </form>
