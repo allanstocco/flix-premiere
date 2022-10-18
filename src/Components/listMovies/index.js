@@ -4,12 +4,10 @@ import MaxLimit from "../formListMoviesLimit";
 
 export default function ListMovies() {
   const [movies, setMovies] = useState([]);
-  console.log(movies);
+  const [len, setLength] = useState("10");
 
-  var interValAPI;
-
-  const moviesData = (movie) => {
-    getMovies(movie).then((response) =>
+  const moviesData = (l) => {
+    getMovies(l).then((response) =>
       setMovies(
         response.data.films.filter(
           ({ duration_seconds }) => duration_seconds > 5500
@@ -19,18 +17,20 @@ export default function ListMovies() {
   };
 
   useEffect(() => {
-    moviesData();
-
-    interValAPI = setInterval(() => {
-      moviesData();
+    moviesData(len);
+    const intervalId = setInterval(() => {
+      moviesData(len);
+      console.log(`START - ${intervalId}`);
     }, 5000);
-  }, []);
+
+    return () => clearInterval(intervalId);
+  }, [len]);
 
   return (
     <div className="container">
       <div className="row align-items-center my-5">
         <h1 className="font-weight-light text-center">Movies</h1>
-        <MaxLimit onSubmit={moviesData}></MaxLimit>;
+        <MaxLimit onSubmit={setLength}></MaxLimit>
         <div className="container mt-4">
           <div className="row d-flex justify-content-around">
             {movies
